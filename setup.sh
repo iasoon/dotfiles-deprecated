@@ -9,15 +9,15 @@ else
     git clone $REPO $DEST
 fi
 
-function setup(){
+function link(){
     SRC="$1"
     DST="$2"
-    echo "Installing $SRC"
+    echo "Linking $SRC"
     mkdir -p $(dirname "$DST")
     ln -sfn "$DEST/$SRC" "$DST"
 }
 
-setup vimrc "$HOME/.vimrc"
+link vimrc "$HOME/.vimrc"
 
 if [[ -d $HOME/.vim/bundle/neobundle.vim ]]; then
     echo "NeoBundle is installed"

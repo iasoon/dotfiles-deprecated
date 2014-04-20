@@ -1,5 +1,4 @@
-"Vundle
-set nocompatible
+set nocompatible    " Be Improved!
 filetype off
 filetype plugin indent on
 
@@ -10,37 +9,47 @@ set runtimepath+=~/.vim/bundle/neobundle.vim/
 " Required:
 call neobundle#rc(expand('~/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
-"Bundles
+" Bundles
 NeoBundle 'scrooloose/nerdtree'
-NeoBundle 'vim-ruby/vim-ruby'
-NeoBundle 'Valloric/YouCompleteMe'
 NeoBundle 'kien/ctrlp.vim'
 NeoBundle 'tomasr/molokai'
+NeoBundle 'Valloric/YouCompleteMe', {
+    \ 'build' : {
+    \   'unix' : './install.sh'
+    \ },
+\}
+" Language-specific bundles
+NeoBundle 'vim-ruby/vim-ruby'
+
 NeoBundleCheck
 
-"General
+" General settings
 
 set lazyredraw
 syntax on
 set number
 set noswapfile
-"1 tab == 4 spaces
-set tabstop=4
+set expandtab       " use spaces for indentation
+set tabstop=4       " 1 tab == 4 spaces
 set shiftwidth=4
-set expandtab
+set softtabstop=4
 set autoindent
 set smartindent
-set softtabstop=4
-"leader
+set scrolloff=8     " keep lines above/below cursor
+" leader
 let mapleader = "."
 
-"NERDtree
+" NERDtree
 map <Leader>nt :NERDTreeToggle<CR>
 
-"custom functions
-vmap ; :norm 
+" YouCompleteMe
+" For use with Eclim
+let g:EclimCompletionMethod = 'omnifunc'
 
-"Enable 256 color mode
+" write with sudo
+cmap w!! w !sudo tee % > /dev/null
+
+" Enable 256 color mode
 set t_Co=256
 
 color molokai
