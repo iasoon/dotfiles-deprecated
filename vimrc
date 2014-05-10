@@ -11,8 +11,10 @@ call neobundle#rc(expand('~/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
 " Bundles
 NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'scrooloose/syntastic'
 NeoBundle 'kien/ctrlp.vim'
 NeoBundle 'tomasr/molokai'
+NeoBundle 'chriskempson/vim-tomorrow-theme'
 NeoBundle 'Valloric/YouCompleteMe', {
     \ 'build' : {
     \   'unix' : './install.sh'
@@ -36,6 +38,8 @@ set softtabstop=4
 set autoindent
 set smartindent
 set scrolloff=8     " keep lines above/below cursor
+" always draw powerline
+set laststatus=2
 " leader
 let mapleader = "."
 
@@ -51,5 +55,4 @@ cmap w!! w !sudo tee % > /dev/null
 
 " Enable 256 color mode
 set t_Co=256
-
-color molokai
+color trans
