@@ -3,6 +3,7 @@ filetype off
 filetype plugin indent on
 
 
+
 set runtimepath+=~/.vim/bundle/neobundle.vim/
 
 " Let NeoBundle manage NeoBundle
@@ -36,7 +37,6 @@ set tabstop=4       " 1 tab == 4 spaces
 set shiftwidth=4
 set softtabstop=4
 set autoindent
-set smartindent
 set scrolloff=8     " keep lines above/below cursor
 " always draw powerline
 set laststatus=2
@@ -55,4 +55,4 @@ cmap w!! w !sudo tee % > /dev/null
 
 " Enable 256 color mode
 set t_Co=256
-color trans
+color molokai
