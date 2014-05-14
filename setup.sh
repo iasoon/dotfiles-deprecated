@@ -20,6 +20,7 @@ function link(){
 
 setmode "https://github.com/TovenaarKlus/dotfiles.git" "$HOME/.dotfiles"
 link vimrc "$HOME/.vimrc"
+link tmux.conf "$HOME/.tmux.conf"
 
 setmode "https://github.com/TovenaarKlus/prezto.git" "$HOME/.zprezto"
 link runcoms/zprofile $HOME/.zprofile
