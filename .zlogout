@@ -1,1 +1,0 @@
-/home/ilion/.prezto/runcoms/zlogout
