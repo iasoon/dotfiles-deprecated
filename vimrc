@@ -14,6 +14,7 @@ NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'kien/ctrlp.vim'
 NeoBundle 'tomasr/molokai'
+NeoBundle 'christoomey/vim-tmux-navigator'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'Valloric/YouCompleteMe', {
     \ 'build' : {
@@ -30,26 +31,27 @@ set lazyredraw
 syntax on
 set number
 set noswapfile
-set tabstop=4       " 1 tab == 4 spaces
+set tabstop=4               " 1 tab == 4 spaces
 set autoindent
-set scrolloff=8     " keep lines above/below cursor
-set laststatus=2    " always draw powerline
+set scrolloff=8             " keep lines above/below cursor
+set laststatus=2            " always draw powerline
+set clipboard=unnamedplus   " use system clipboard
 set showcmd
 
-set expandtab       " use spaces for indentation
+set expandtab               " use spaces for indentation
 set shiftwidth=4
 set softtabstop=4
 
-set list            " show whitespace as dots
+set list                    " show whitespace as dots
 set listchars=tab:\ \ ,trail:·
+
+" leader
+let mapleader = "."
 
 " easier motion
 noremap H ^
 noremap S g_
 noremap s l
-
-" leader
-let mapleader = "."
 
 " NERDtree
 map <Leader>t :NERDTreeToggle<CR>
