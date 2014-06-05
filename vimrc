@@ -10,25 +10,30 @@ call neobundle#rc(expand('~/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
 
 " Bundles
+NeoBundle 'Lokaltog/vim-easymotion'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'scrooloose/syntastic'
-NeoBundle 'kien/ctrlp.vim'
-NeoBundle 'tomasr/molokai'
-NeoBundle 'christoomey/vim-tmux-navigator'
 NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'tpope/vim-commentary'
+NeoBundle 'tpope/vim-surround'
+NeoBundle 'kien/ctrlp.vim'
 NeoBundle 'Valloric/YouCompleteMe', {
     \ 'build' : {
     \   'unix' : './install.sh'
     \ },
 \}
+NeoBundle 'tomasr/molokai'
+NeoBundle 'Lokaltog/vim-distinguished'
+NeoBundle 'christoomey/vim-tmux-navigator'
+
 " Language-specific bundles
 NeoBundle 'vim-ruby/vim-ruby'
 
 NeoBundleCheck
 
 " General settings
-set lazyredraw
 syntax on
+set lazyredraw
 set number
 set noswapfile
 set tabstop=4               " 1 tab == 4 spaces
@@ -37,27 +42,38 @@ set scrolloff=8             " keep lines above/below cursor
 set laststatus=2            " always draw powerline
 set clipboard=unnamedplus   " use system clipboard
 set showcmd
+" Searching
+set incsearch
+set ignorecase
+set smartcase
 
 set expandtab               " use spaces for indentation
 set shiftwidth=4
 set softtabstop=4
 
-set list                    " show whitespace as dots
+set list                    " show trailing whitespace as dots
 set listchars=tab:\ \ ,trail:·
 
 " leader
 let mapleader = "."
 
-" easier motion
+" motion
 noremap H ^
-noremap S g_
-noremap s l
+noremap L g_
 
 " NERDtree
 map <Leader>t :NERDTreeToggle<CR>
+
 " CtrlP
 map <Leader>p :CtrlP<CR>
 map <Leader>b :CtrlPBuffer<CR>
+
+" Commentary
+autocmd FileType sed set commentstring=#\ %s
+autocmd FileType awk set commentstring=#\ %s
+
+" EasyMotion
+map <Leader> <Plug>(easymotion-prefix)
 
 " YouCompleteMe
 let g:ycm_autoclose_preview_window_after_completion = 1
