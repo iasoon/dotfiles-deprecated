@@ -1,2 +1,2 @@
 Installation:
-curl https://raw.githubusercontent.com/TovenaarKlus/dotfiles/master/setup.sh | sh
+curl https://raw.githubusercontent.com/Iasoon/dotfiles/master/setup.sh | sh
