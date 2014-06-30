@@ -18,11 +18,11 @@ function link(){
     ln -sfn "$DEST/$SRC" "$DST"
 }
 
-setmode "https://github.com/TovenaarKlus/dotfiles.git" "$HOME/.dotfiles"
+setmode "https://github.com/Iasoon/dotfiles.git" "$HOME/.dotfiles"
 link vimrc "$HOME/.vimrc"
 link tmux.conf "$HOME/.tmux.conf"
 
-setmode "https://github.com/TovenaarKlus/prezto.git" "$HOME/.zprezto"
+setmode "https://github.com/Iasoon/prezto.git" "$HOME/.zprezto"
 link runcoms/zprofile $HOME/.zprofile
 link runcoms/zlogout $HOME/.zlogout
 link runcoms/zlogin $HOME/.zlogin
