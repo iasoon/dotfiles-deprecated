@@ -16,15 +16,17 @@ NeoBundle 'scrooloose/syntastic'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tpope/vim-commentary'
 NeoBundle 'tpope/vim-surround'
+NeoBundle 'godlygeek/tabular'
 NeoBundle 'kien/ctrlp.vim'
 NeoBundle 'Valloric/YouCompleteMe', {
     \ 'build' : {
     \   'unix' : './install.sh'
     \ },
 \}
+
 NeoBundle 'tomasr/molokai'
+NeoBundle 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
 NeoBundle 'Lokaltog/vim-distinguished'
-NeoBundle 'christoomey/vim-tmux-navigator'
 
 " Language-specific bundles
 NeoBundle 'vim-ruby/vim-ruby'
@@ -39,7 +41,6 @@ set noswapfile
 set tabstop=4               " 1 tab == 4 spaces
 set autoindent
 set scrolloff=8             " keep lines above/below cursor
-set laststatus=2            " always draw powerline
 set clipboard=unnamedplus   " use system clipboard
 set showcmd
 " Searching
@@ -48,6 +49,7 @@ set ignorecase
 set smartcase
 
 set expandtab               " use spaces for indentation
+set shiftround              " round space shifts to tabs
 set shiftwidth=4
 set softtabstop=4
 
@@ -60,6 +62,12 @@ let mapleader = "."
 " motion
 noremap H ^
 noremap L g_
+
+" Powerline
+python from powerline.vim import setup as powerline_setup
+python powerline_setup()
+python del powerline_setup
+set laststatus=2            " always draw powerline
 
 " NERDtree
 map <Leader>t :NERDTreeToggle<CR>
@@ -83,4 +91,4 @@ cmap w!! w !sudo tee % > /dev/null
 
 " Enable 256 color mode
 set t_Co=256
-color molokai
+color Tomorrow-Night-Eighties
