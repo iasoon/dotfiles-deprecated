@@ -1,54 +1,51 @@
 set nocompatible    " Be Improved!
-filetype plugin indent on
 
-set runtimepath+=~/.vim/bundle/neobundle.vim/
+" Plugins {{{
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
-" Let NeoBundle manage NeoBundle
-" Required:
-call neobundle#rc(expand('~/.vim/bundle/'))
-NeoBundleFetch 'Shougo/neobundle.vim'
-
-" Bundles
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
 
 " Navigation
-NeoBundle 'Lokaltog/vim-easymotion'
-NeoBundle 'scrooloose/nerdtree'
-NeoBundle 'kien/ctrlp.vim'
+Bundle 'Shougo/vimproc'
+Bundle 'Shougo/unite.vim'
+Bundle 'Shougo/neomru.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'christoomey/vim-tmux-navigator'
 
 " Editing
-NeoBundle 'tpope/vim-commentary'
-NeoBundle 'tpope/vim-surround'
-NeoBundle 'godlygeek/tabular'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'tpope/vim-surround'
+Plugin 'junegunn/vim-easy-align'
+Plugin 'tpope/vim-unimpaired'
+Plugin 'Raimondi/delimitMate'
 
 " Fancy shit
-NeoBundle 'scrooloose/syntastic'
-NeoBundle 'tpope/vim-fugitive'
+Plugin 'scrooloose/syntastic'
+Plugin 'tpope/vim-fugitive'
+Plugin 'kien/rainbow_parentheses.vim'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
 
-" Completion
-NeoBundle 'Valloric/YouCompleteMe', {
-    \ 'build' : {
-    \   'unix' : './install.sh'
-    \ },
-\}
-NeoBundle 'SirVer/ultisnips'
-NeoBundle 'honza/vim-snippets'
+" Language specific
+Plugin 'vim-ruby/vim-ruby'
+Plugin 'tpope/vim-rails'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'tpope/vim-haml'
+Plugin 'dag/vim2hs'
+Plugin 'LaTeX-Box-Team/LaTeX-Box'
+Plugin 'plasticboy/vim-markdown'
 
-" Ruby
-NeoBundle 'vim-ruby/vim-ruby'
+" Bling
+Plugin 'bling/vim-airline'
+Plugin 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
 
-" Javascript
-NeoBundleLazy 'jelera/vim-javascript-syntax', {
-    \ 'autoload':{
-    \   'filetypes': ['javascript']
-    \ }
-\}
+call vundle#end()            " required
+filetype plugin indent on    " required
 
-" Looks
-NeoBundle 'tomasr/molokai'
-NeoBundle 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
-NeoBundle 'Lokaltog/vim-distinguished'
-
-NeoBundleCheck
+" }}}
 
 " General settings
 syntax on
@@ -57,9 +54,16 @@ set number
 set noswapfile
 set autoindent
 set scrolloff=8             " keep lines above/below cursor
-set clipboard=unnamedplus   " use system clipboard
+set tw=80                   " 80 lines wide
 set showcmd
 let mapleader = "."
+
+" Clipboard
+if has ('unnamedplus')
+    set clipboard=unnamedplus
+else
+    set clipboard=unnamed
+end
 
 " Searching
 set incsearch
@@ -78,6 +82,8 @@ set softtabstop=4
 " Language specific indenting
 autocmd FileType ruby setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType html setlocal shiftwidth=2 softtabstop=2
+autocmd FileType coffee setlocal shiftwidth=2 softtabstop=2
+autocmd FileType haml setlocal shiftwidth=2 softtabstop=2
 
 " show trailing whitespace as dots
 set list
@@ -97,45 +103,61 @@ vnoremap <C-k> :m '<-2<CR>gv
 vnoremap > >gv
 vnoremap < <gv
 
-" Pasting
-imap <C-v> <Esc>pgi
-
 " Plugin settings
 
-" Powerline
-python from powerline.vim import setup as powerline_setup
-python powerline_setup()
-python del powerline_setup
-set laststatus=2            " always draw powerline
+" Always show Airline
+let g:airline_powerline_fonts = 1
+set laststatus=2
 
 " NERDtree
-map <Leader>t :NERDTreeToggle<CR>
+nmap <Leader>t :NERDTreeToggle<CR>
 
-" CtrlP
-map <Leader>p :CtrlP<CR>
-map <Leader>b :CtrlPBuffer<CR>
+" NerdCommenter
+imap <C-c> <plug>NERDCommenterInsert
+nmap ]c o<plug>NERDCommenterInsert
+nmap [c O<plug>NERDCommenterInsert
 
-" Commentary
-autocmd FileType sed set commentstring=#\ %s
-autocmd FileType awk set commentstring=#\ %s
+" Unite
+let g:unite_winheight=8
+let g:unite_source_history_yank_enable = 1
+let g:unite_source_grep_command='ag'
+let g:unite_source_grep_default_opts = '--nogroup --nocolor --column'
+call unite#custom#profile('default', 'context', {
+    \ 'prompt': '» ',
+    \ 'direction': 'botright',
+    \ 'prompt_direction': 'top',
+    \ })
 
-" YouCompleteMe
-let g:ycm_autoclose_preview_window_after_completion = 1
+call unite#filters#matcher_default#use(['matcher_fuzzy'])
+call unite#filters#sorter_default#use(['sorter_rank'])
+nmap <Leader>p :Unite -buffer-name=files -start-insert file_rec/async<CR>
+nmap <Leader>m :Unite -buffer-name=mru file_mru<CR>
+nmap <Leader>y :Unite -buffer-name=yanks history/yank<CR>
+nmap <Leader>g :Unite grep:.<CR>
 
-" UltiSnips
-let g:UltiSnipsExpandTrigger="<C-w>"
-let g:UltiSnipsJumpForwardTrigger="<C-w>"
-let g:UltiSnipsJumpBackwardTrigger="<C-b>"
-" let g:UltiSnipsEditSplit="vertical"
+" Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
+vmap <Enter> <Plug>(EasyAlign)
+" Start interactive EasyAlign for a motion/text object (e.g. <Leader>aip)
+nmap <Leader>a <Plug>(EasyAlign)
+
+" LatexBox
+autocmd filetype tex nmap <Leader>c :Latexmk<CR>
+
+"YouCompleteMe
+let g:ycm_path_to_python_interpreter = '/usr/bin/python2'
+let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
+
+"let g:ycm_path_to_python_interpreter = '/usr/bin/python2' UltiSnips
+let g:UltiSnipsExpandTrigger="<Leader>s"
+let g:UltiSnipsJumpForwardTrigger="<Tab>"
+let g:UltiSnipsJumpBackwardTrigger="<S-Tab>"
 
 " write with sudo
 cmap w!! w !sudo tee % > /dev/null
 
-" Mouse scrolling support
-" set mouse=nicr
-" set ttymouse=xterm
-
 " Colours
 set t_Co=256            " 256 colour mode
-set colorcolumn=80
+set background=dark
 color Tomorrow-Night-Eighties
+hi clear Conceal
+hi YcmErrorSection guibg=#3f0000
