@@ -114,8 +114,6 @@ nmap <Leader>t :NERDTreeToggle<CR>
 
 " NerdCommenter
 imap <C-c> <plug>NERDCommenterInsert
-nmap ]c o<plug>NERDCommenterInsert
-nmap [c O<plug>NERDCommenterInsert
 
 " Unite
 let g:unite_winheight=8
@@ -146,10 +144,10 @@ autocmd filetype tex nmap <Leader>c :Latexmk<CR>
 "YouCompleteMe
 let g:ycm_path_to_python_interpreter = '/usr/bin/python2'
 let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
+let g:ycm_autoclose_preview_window_after_completion=1
 
-"let g:ycm_path_to_python_interpreter = '/usr/bin/python2' UltiSnips
-let g:UltiSnipsExpandTrigger="<Leader>s"
-let g:UltiSnipsJumpForwardTrigger="<Tab>"
+let g:UltiSnipsExpandTrigger="<C-e>"
+let g:UltiSnipsJumpForwardTrigger="<Tab"
 let g:UltiSnipsJumpBackwardTrigger="<S-Tab>"
 
 " write with sudo
