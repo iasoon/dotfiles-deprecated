@@ -35,9 +35,9 @@ link tmux.conf "$HOME/.tmux.conf"
 
 echo "Setting up Vundle"
 if [[ -d $HOME/.vim/bundle/vundle ]]; then
-echo "Vundle already installed"
+    echo "Vundle already installed"
 else
-git clone https://github.com/gmarik/vundle.git $HOME/.vim/bundle/vundle
+    git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 fi
 
 echo "updating Bundles"
