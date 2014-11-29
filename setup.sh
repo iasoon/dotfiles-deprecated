@@ -33,10 +33,12 @@ link vimrc "$HOME/.vimrc"
 link muttrc "$HOME/.muttrc"
 link tmux.conf "$HOME/.tmux.conf"
 
-
-if [[ -d $HOME/.vim/bundle/neobundle.vim ]]; then
-    echo "NeoBundle is installed"
+echo "Setting up Vundle"
+if [[ -d $HOME/.vim/bundle/vundle ]]; then
+echo "Vundle already installed"
 else
-    echo "Setting up Neobundle"
-    curl https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh | sh
+git clone https://github.com/gmarik/vundle.git $HOME/.vim/bundle/vundle
 fi
+
+echo "updating Bundles"
+vim +BundleInstall! +qall
