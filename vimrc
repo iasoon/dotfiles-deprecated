@@ -5,14 +5,14 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 " let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
+Bundle 'gmarik/Vundle.vim'
 
 " Navigation
 Bundle 'Shougo/vimproc'
 Bundle 'Shougo/unite.vim'
 Bundle 'Shougo/neomru.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'christoomey/vim-tmux-navigator'
+Bundle 'scrooloose/nerdtree'
+Bundle 'christoomey/vim-tmux-navigator'
 
 " Editing
 Plugin 'scrooloose/nerdcommenter'
@@ -56,7 +56,7 @@ set autoindent
 set scrolloff=8             " keep lines above/below cursor
 set tw=80                   " 80 lines wide
 set showcmd
-let mapleader = "."
+let mapleader = ","
 
 " Clipboard
 if has ('unnamedplus')
@@ -110,7 +110,7 @@ let g:airline_powerline_fonts = 1
 set laststatus=2
 
 " NERDtree
-nmap <Leader>t :NERDTreeToggle<CR>
+nmap <C-t> :NERDTreeToggle<CR>
 
 " NerdCommenter
 imap <C-c> <plug>NERDCommenterInsert
@@ -128,18 +128,18 @@ call unite#custom#profile('default', 'context', {
 
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 call unite#filters#sorter_default#use(['sorter_rank'])
-nmap <Leader>p :Unite -buffer-name=files -start-insert file_rec/async<CR>
-nmap <Leader>m :Unite -buffer-name=mru file_mru<CR>
-nmap <Leader>y :Unite -buffer-name=yanks history/yank<CR>
-nmap <Leader>g :Unite grep:.<CR>
+nmap <C-p> :Unite -buffer-name=files -start-insert file_rec/async<CR>
+nmap <C-m> :Unite -buffer-name=mru file_mru<CR>
+nmap <C-y> :Unite -buffer-name=yanks history/yank<CR>
+nmap <C-g> :Unite grep:.<CR>
 
 " Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
 vmap <Enter> <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. <Leader>aip)
-nmap <Leader>a <Plug>(EasyAlign)
+nmap <Le>a <Plug>(EasyAlign)
 
 " LatexBox
-autocmd filetype tex nmap <Leader>c :Latexmk<CR>
+autocmd filetype tex nmap <C-c> :Latexmk<CR>
 
 "YouCompleteMe
 let g:ycm_path_to_python_interpreter = '/usr/bin/python2'
