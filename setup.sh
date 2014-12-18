@@ -5,7 +5,7 @@ function getfiles(){
     if [[ -d $DEST ]]; then
         cd $DEST && git pull origin master && cd -
     else
-        echo "cloning repo: $REPO into dir: $DEST"
+        echo "Cloning repo: $REPO into dir: $DEST"
         git clone --recursive $REPO $DEST
     fi
 }
@@ -40,5 +40,5 @@ else
     git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 fi
 
-echo "updating Bundles"
+echo "Updating Bundles"
 vim +BundleInstall! +qall
