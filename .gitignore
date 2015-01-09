@@ -1,0 +1,11 @@
+# weechat
+weechat/irc.conf
+weechat/logs/
+weechat/xfer/
+weechat/weechat.log
+weechat/script/plugins.xml.gz
+weechat/urlserver_list.txt
+weechat/weechat_fifo*
+
+# ncmpcpp
+ncmpcpp/error.log

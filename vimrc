@@ -35,6 +35,7 @@ Plugin 'honza/vim-snippets'
 " }}}
 " Language specific {{{
 " ------------------------------------------------------------------------------
+Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'tpope/vim-rails'
 Plugin 'kchmck/vim-coffee-script'
@@ -114,6 +115,12 @@ vnoremap <C-k> :m '<-2<CR>gv
 vnoremap > >gv
 vnoremap < <gv
 " }}}
+
+" Windows
+map <M-h> :wincmd h<CR>
+map <M-t> :wincmd j<CR>
+map <M-n> :wincmd k<CR>
+map <M-s> :wincmd l<CR>
 " }}}
 
 " Language specific indenting

@@ -30,15 +30,17 @@ link runcoms/zpreztorc $HOME/.zpreztorc
 echo "Setting up dotfiles"
 getfiles "https://github.com/Iasoon/dotfiles.git" "$HOME/.dotfiles"
 link vimrc "$HOME/.vimrc"
+link weechat "$HOME/.weechat"
+link ncmpcpp "$HOME/.ncmpcpp"
 link muttrc "$HOME/.muttrc"
 link tmux.conf "$HOME/.tmux.conf"
 
 echo "Setting up Vundle"
-if [[ -d $HOME/.vim/bundle/vundle ]]; then
+if [[ -d $HOME/.vim/bundle/Vundle.vim ]]; then
     echo "Vundle already installed"
 else
     git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 fi
 
 echo "updating Bundles"
-vim +BundleInstall! +qall
+vim +BundleInstall! +qall &
