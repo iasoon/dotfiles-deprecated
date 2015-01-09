@@ -33,6 +33,7 @@ link vimrc "$HOME/.vimrc"
 link weechat "$HOME/.weechat"
 link ncmpcpp "$HOME/.ncmpcpp"
 link muttrc "$HOME/.muttrc"
+link Xresources "$HOME/.Xresources"
 link tmux.conf "$HOME/.tmux.conf"
 
 echo "Setting up Vundle"
