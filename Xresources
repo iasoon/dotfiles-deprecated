@@ -12,6 +12,7 @@ Xft.hintstyle: hintslight
 ! Colour settings
 !-----------------------------------------------------------------------------
 
+
 !TomorrowNightEighties
 #define t_background #2d2d2d
 #define t_current_line #393939
@@ -28,10 +29,12 @@ Xft.hintstyle: hintslight
 *.foreground: t_foreground
 *.background: t_background
 
-*.cursorColor: #aeafad
+!*.cursorColor: #aeafad
+*.cursorColor: t_comment
 ! Black / Grey
 *.color0: #000000
-*.color8: #666666
+!*.color8: #666666
+*.color8: t_selection
 ! Red / Bright Red
 *.color1: t_red
 *.color9: #FF3334
@@ -50,20 +53,20 @@ Xft.hintstyle: hintslight
 ! Cyan (Aqua) + Bright Cyan
 *.color6: t_aqua
 *.color14: #54ced6
-! Light Grey (Selection) + White (Current Line)
-*.color7: t_selection
-*.color15: t_current_line
-!*.color15: t_foreground
+! Light Grey + White
+!*.color7: t_selection
+*.color7: t_comment
+!*.color15: t_current_line
+*.color15: t_foreground
 
 !-----------------------------------------------------------------------------
 ! URxvt settings
 !-----------------------------------------------------------------------------
 
 ! Window size
-URxvt.geometry: 90x24
-
+URxvt.geometry: 90x24 
 ! Meta is no escape
-URxvt.meta8: true
+! URxvt.meta8: true
 
 ! Scrollbar
 URxvt.scrollBar: false
@@ -83,4 +86,5 @@ URxvt.url-select.underline: true
 URxvt.keysym.M-c:   perl:clipboard:copy
 URxvt.keysym.M-v:   perl:clipboard:paste
 URxvt.keysym.M-C-v: perl:clipboard:paste_escaped
-URxvt.keysym.M-u: perl:url-select:select_next
+URxvt.keysym.M-u:      perl:url-select:select_next
+URxvt.searchable-scrollback: false

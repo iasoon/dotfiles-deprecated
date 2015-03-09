@@ -43,6 +43,7 @@ Plugin 'tpope/vim-haml'
 Plugin 'dag/vim2hs'
 Plugin 'LaTeX-Box-Team/LaTeX-Box'
 Plugin 'plasticboy/vim-markdown'
+Plugin 'mustache/vim-mustache-handlebars'
 " }}}
 " Bling {{{
 " ------------------------------------------------------------------------------
@@ -57,16 +58,16 @@ filetype plugin indent on    " required
 
 " General settings {{{
 " ==============================================================================
-let mapleader = "-"
+let mapleader = ","
 syntax on
 set autoread                " Reload on change
 set scrolloff=8             " keep lines above/below cursor
 set lazyredraw              " Faster macros! Yay!
 set showcmd                 " Show commands
-set noswapfile              " Lol swap file
-set autoindent              " Do as I do, vim
+set noswapfile              " Lol swap files
 set tw=80                   " 80 lines wide
 set number                  " Show line numbers
+set hidden                  " Allow unwritten files to be hidden
 
 " show trailing whitespace as dots
 set list
@@ -83,6 +84,7 @@ end
 
 " Search options {{{
 " ------------------------------------------------------------------------------
+
 set incsearch
 set ignorecase
 set smartcase
@@ -92,6 +94,7 @@ nnoremap <silent> <C-l> :nohl<CR><C-l>
 
 " Indenting settings {{{
 " ------------------------------------------------------------------------------
+set autoindent
 set expandtab               " use spaces for indentation
 set shiftround              " round space shifts
 set tabstop=4               " 1 tab == 4 spaces
@@ -116,18 +119,18 @@ vnoremap > >gv
 vnoremap < <gv
 " }}}
 
-" Windows
-map <M-h> :wincmd h<CR>
-map <M-t> :wincmd j<CR>
-map <M-n> :wincmd k<CR>
-map <M-s> :wincmd l<CR>
+" Naviation {{{
+" ------------------------------------------------------------------------------
+map h :wincmd h<CR>
+map t :wincmd j<CR>
+map n :wincmd k<CR>
+map s :wincmd l<CR>
+
 " }}}
 
-" Language specific indenting
-autocmd FileType ruby setlocal shiftwidth=2 softtabstop=2
-autocmd FileType html setlocal shiftwidth=2 softtabstop=2
-autocmd FileType coffee setlocal shiftwidth=2 softtabstop=2
-autocmd FileType haml setlocal shiftwidth=2 softtabstop=2
+" }}}
+
+
 " Plugin settings {{{
 " ==============================================================================
 
@@ -147,6 +150,7 @@ let delimitMate_expand_space = 1
 " ------------------------------------------------------------------------------
 nmap <C-t> :NERDTreeToggle<CR>
 " }}}
+
 " Unite {{{
 "------------------------------------------------------------------------------
 let g:unite_winheight=8
@@ -158,13 +162,24 @@ call unite#custom#profile('default', 'context', {
     \ 'direction': 'botright',
     \ 'prompt_direction': 'top',
     \ })
+"try
+    "" Set up some custom ignores
+    "call unite#custom#source('buffer,file,file_rec/async,file_rec,file_mru,file,grep',
+    "\ 'ignore_pattern', join([
+    "\ '\.tmp/', 
+    "\ ], '\|'))
+"catch
+"endtry
 
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 call unite#filters#sorter_default#use(['sorter_rank'])
-nmap <C-p> :Unite -buffer-name=files -start-insert file_rec/async<CR>
+" g for go
+nmap <C-g> :Unite -buffer-name=files -start-insert file_rec/async<CR>
+" p for pattern
+nmap <C-p> :Unite grep:.<CR>
 nmap <C-m> :Unite -buffer-name=mru file_mru<CR>
 nmap <C-y> :Unite -buffer-name=yanks history/yank<CR>
-nmap <C-g> :Unite grep:.<CR>
+nmap <Leader><Leader>  :Unite file<CR>
 
 " }}}
 
@@ -186,6 +201,18 @@ let g:UltiSnipsJumpForwardTrigger="<C-w"
 let g:UltiSnipsJumpBackwardTrigger="<C-S-w>"
 
 " }}}
+" }}}
+
+" Language specific settings {{{
+" ==============================================================================
+
+"autocmd FileType c setlocal noexpandtab
+autocmd FileType ruby setlocal shiftwidth=2 softtabstop=2
+autocmd FileType html setlocal shiftwidth=2 softtabstop=2
+autocmd FileType coffee setlocal shiftwidth=2 softtabstop=2
+autocmd FileType haml setlocal shiftwidth=2 softtabstop=2
+
+" }}}
 
 " write with sudo
 cmap w!! w !sudo tee % > /dev/null
@@ -197,4 +224,5 @@ color Tomorrow-Night-Eighties
 hi clear Conceal
 hi YcmErrorSection guibg=#3f0000
 
+let g:EclimCompletionMethod = 'omnifunc'
 " vim: foldmethod=marker

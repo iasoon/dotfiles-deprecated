@@ -35,13 +35,14 @@ link ncmpcpp "$HOME/.ncmpcpp"
 link muttrc "$HOME/.muttrc"
 link Xresources "$HOME/.Xresources"
 link tmux.conf "$HOME/.tmux.conf"
+link bin "$HOME/bin"
 
 echo "Setting up Vundle"
 if [[ -d $HOME/.vim/bundle/Vundle.vim ]]; then
     echo "Vundle already installed"
 else
     git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+    echo "installing Bundles"
+    vim +BundleInstall! +qall
 fi
 
-echo "updating Bundles"
-vim +BundleInstall! +qall &

@@ -1,0 +1,4 @@
+#! /bin/bash
+FEHPARAMS='--scale-down -g 1000x800'
+curl -IL $1 | grep Content-Type | tail -n 1 | grep image &&
+    feh $FEHPARAMS $1 || firefox $1

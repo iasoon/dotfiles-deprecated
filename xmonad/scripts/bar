@@ -1,0 +1,7 @@
+#! /bin/bash
+FONT='Anonymous Pro for Powerline-10'
+# Terminate old conkies
+killall conky
+conky -c ~/.xmonad/scripts/conky-left  | dzen2 -x 0 -w 600 -ta l -fn "$FONT" &
+conky -c ~/.xmonad/scripts/conky-right | dzen2 -x 1000 -w 600 -ta r -fn "$FONT" &
+dzen2 -x 600 -w 400 -fn "$FONT"

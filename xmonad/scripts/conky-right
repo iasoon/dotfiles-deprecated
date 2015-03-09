@@ -1,0 +1,12 @@
+background no
+out_to_console yes
+out_to_x no
+update_interval 10
+update_interval_on_battery 30
+
+TEXT
+# battery color
+${if_match $battery_percent <= 15}^fg(\#f2777a) $else \
+${if_match $battery_percent <= 30}^fg(\#f99157) $else \
+^fg(\#99cc99) $endif $endif ${battery_percent}% \
+^p(20)^fg() ${time %H:%M} ^p(10)
