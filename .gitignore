@@ -13,6 +13,5 @@ ncmpcpp/error.log
 #xmonad
 xmonad/xmonad.errors
 xmonad/xmonad.hi
-xmonad/xmonad.hs
 xmonad/xmonad.o
 xmonad/xmonad-x86_64-linux
