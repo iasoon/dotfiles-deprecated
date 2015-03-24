@@ -1,5 +1,6 @@
 set nocompatible    " Be Improved!
 
+
 " Plugins {{{
 " ==============================================================================
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -40,7 +41,7 @@ Plugin 'vim-ruby/vim-ruby'
 Plugin 'tpope/vim-rails'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'tpope/vim-haml'
-Plugin 'dag/vim2hs'
+"Plugin 'dag/vim2hs'
 Plugin 'LaTeX-Box-Team/LaTeX-Box'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'mustache/vim-mustache-handlebars'
@@ -211,6 +212,11 @@ autocmd FileType ruby setlocal shiftwidth=2 softtabstop=2
 autocmd FileType html setlocal shiftwidth=2 softtabstop=2
 autocmd FileType coffee setlocal shiftwidth=2 softtabstop=2
 autocmd FileType haml setlocal shiftwidth=2 softtabstop=2
+autocmd FileType haskell call HaskellHook()
+
+function HaskellHook()
+    noremap <C-f> :%!stylish-haskell<CR>
+endfunction
 
 " }}}
 
