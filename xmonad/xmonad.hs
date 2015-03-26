@@ -81,9 +81,9 @@ dzenfg c = wrap ("^fg("++c++")") "^fg()"
 
 -- Keybinds
 keybinds c = mkKeymap c $
-    [ ("M-<Return>", spawn "urxvt")
-    , ("M-S-<Return>", spawn "urxvt -cd $(xcwd)")
-    , ("M-<Space>", spawn "cmd=`yeganesh -x` && exec $cmd")
+    [ ("M-<Space>", spawn "cmd=`yeganesh -x` && exec $cmd")
+    , ("M-<Return>", spawn "xcwd | xargs urxvt -cd")
+    , ("M-S-<Return>", spawn "urxvt")
 
     -- Directional movement
     , ("M-h", windowGo L False)
