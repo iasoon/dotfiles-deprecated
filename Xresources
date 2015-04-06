@@ -76,7 +76,8 @@ URxvt.saveLines: 8000
 
 ! Fonts
 *.font: xft:Anonymous Pro for Powerline:size=10, \
-            xft:DejaVu Sans Mono for Powerline: size=10
+            xft:DejaVu Sans Mono for Powerline:size=10, \
+            xft:Symbola:size=10
 
 URxvt.perl-ext-common: default,clipboard,url-select
 URxvt.url-select.launcher: /home/iasoon/bin/urlopen

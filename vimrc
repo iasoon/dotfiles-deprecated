@@ -33,6 +33,7 @@ Plugin 'kien/rainbow_parentheses.vim'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
+Plugin 'mattn/emmet-vim'
 " }}}
 " Language specific {{{
 " ------------------------------------------------------------------------------
@@ -41,7 +42,6 @@ Plugin 'vim-ruby/vim-ruby'
 Plugin 'tpope/vim-rails'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'tpope/vim-haml'
-"Plugin 'dag/vim2hs'
 Plugin 'LaTeX-Box-Team/LaTeX-Box'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'mustache/vim-mustache-handlebars'
@@ -70,9 +70,15 @@ set tw=80                   " 80 lines wide
 set number                  " Show line numbers
 set hidden                  " Allow unwritten files to be hidden
 
+" Goodbye Ex
+nnoremap Q <nop>
+" Matchit!
+runtime macros/matchit.vim
+
 " show trailing whitespace as dots
 set list
 set listchars=tab:\ \ ,trail:·
+set showbreak=↪
 
 " Clipboard {{{
 " ------------------------------------------------------------------------------
@@ -210,6 +216,7 @@ let g:UltiSnipsJumpBackwardTrigger="<C-S-w>"
 "autocmd FileType c setlocal noexpandtab
 autocmd FileType ruby setlocal shiftwidth=2 softtabstop=2
 autocmd FileType html setlocal shiftwidth=2 softtabstop=2
+autocmd FileType eruby  setlocal shiftwidth=2 softtabstop=2
 autocmd FileType coffee setlocal shiftwidth=2 softtabstop=2
 autocmd FileType haml setlocal shiftwidth=2 softtabstop=2
 autocmd FileType haskell call HaskellHook()

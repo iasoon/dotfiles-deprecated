@@ -1,11 +1,8 @@
 background no
 out_to_console yes
 out_to_x no
-update_interval 10
+update_interval 30
 
 TEXT
-^p(10)\
-$if_mpd_playing\
-^i($HOME/.xmonad/dzen2/music.xbm)\
-^fg(\#99cc99)${mpd_artist 20} - ${mpd_title 40}\
-$endif
+^p(10)^fg(\#999999)${exec hostname -i | tr -d ' ' } \
+^fg(\#cccccc)${exec netctl-auto current}
