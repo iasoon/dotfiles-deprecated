@@ -44,7 +44,7 @@ Plugin 'kchmck/vim-coffee-script'
 Plugin 'tpope/vim-haml'
 Plugin 'LaTeX-Box-Team/LaTeX-Box'
 Plugin 'plasticboy/vim-markdown'
-Plugin 'mustache/vim-mustache-handlebars'
+Plugin 'Procrat/oz.vim'
 " }}}
 " Bling {{{
 " ------------------------------------------------------------------------------
@@ -223,6 +223,7 @@ autocmd FileType haskell call HaskellHook()
 
 function HaskellHook()
     noremap <C-f> :%!stylish-haskell<CR>
+    noremap <Leader>l 80i-<Esc>
 endfunction
 
 " }}}
