@@ -1,33 +1,35 @@
-import XMonad
+--------------------------------------------------------------------------------
+import qualified Data.Map                            as M
+import           System.Exit
+import           System.IO                           (hPutStrLn)
 
-import System.IO (hPutStrLn)
-import XMonad.Actions.Navigation2D
-import XMonad.Util.EZConfig
-import XMonad.Util.NamedScratchpad
-import XMonad.Util.Run (spawnPipe)
-import XMonad.Hooks.ManageDocks
-import XMonad.Hooks.DynamicLog
-import XMonad.Hooks.Place
-import XMonad.Layout.Grid
-import XMonad.Layout.Spacing
-import XMonad.Layout.Gaps
-import XMonad.Layout.NoBorders
-import XMonad.Layout.MultiToggle
-import XMonad.Layout.MultiToggle.Instances
+--------------------------------------------------------------------------------
+import           XMonad
+import           XMonad.Actions.Navigation2D
+import           XMonad.Hooks.DynamicLog
+import           XMonad.Hooks.ManageDocks
+import           XMonad.Hooks.Place
+import           XMonad.Hooks.SetWMName
+import           XMonad.Layout.Gaps
+import           XMonad.Layout.Grid
+import           XMonad.Layout.MultiToggle
+import           XMonad.Layout.MultiToggle.Instances
+import           XMonad.Layout.NoBorders
+import           XMonad.Layout.Spacing
+import qualified XMonad.StackSet                     as W
+import           XMonad.Util.EZConfig
+import           XMonad.Util.NamedScratchpad
+import           XMonad.Util.Run                     (spawnPipe)
 
-import XMonad.Hooks.SetWMName
-
-import qualified XMonad.StackSet as W
-
-import System.Exit
-
+--------------------------------------------------------------------------------
 main = do   h <- spawnPipe "~/.xmonad/scripts/bar"
             xmonad
                 . withNavigation2DConfig navConf
-                $ defaultConfig 
+                $ defaultConfig
                     { modMask            = mod4Mask             -- Use super
                     , focusFollowsMouse  = False
                     , keys               = keybinds
+                    , mouseBindings      = mousebinds
                     , layoutHook         = layout
                     , workspaces         = slackspaces          -- lol work
                     , normalBorderColor  = "#2d2d2d"
@@ -38,16 +40,11 @@ main = do   h <- spawnPipe "~/.xmonad/scripts/bar"
                     , terminal           = "urxvt"
                     }
 
+--------------------------------------------------------------------------------
+urxvt cmd name = unwords ["urxvt", "-name", name, "-e", cmd]
+
+--------------------------------------------------------------------------------
 slackspaces = ["web", "code", "blargh"]
-
-scratchpads =
-    [ interm "weechat" weechatPlace ]
-    where interm prog  = NS prog (runInTerm prog prog) 
-                        (appName =? prog)
-          weechatPlace = placeWithGaps (fixed (0.5, 0.5)) <+> doFloat
-
-placeWithGaps = placeHook . withGaps (25, 10, 10, 10)
-runInTerm prog name = unwords ["urxvt", "-name", name, "-e", prog]
 
 layout =    avoidStruts
             . smartBorders
@@ -55,17 +52,30 @@ layout =    avoidStruts
             . mkToggle (single FULL)
             $ GridRatio (4/3)
 
+--------------------------------------------------------------------------------
 equalSpacing px = spacing px . gaps gs
         where gs  = zip [U, D, R, L] (repeat px)
+
+--------------------------------------------------------------------------------
+placeWithGaps = placeHook . withGaps (25, 10, 10, 10)
 
 manager = namedScratchpadManageHook scratchpads <+> composeAll
     [ className =? "feh" --> placeFeh <+> doFloat
     , appName   =? "float" --> doFloat ]
     where   placeFeh = placeWithGaps $ fixed (1,0)
 
+--------------------------------------------------------------------------------
+scratchpads =
+    [ interm "weechat" weechatPlace ]
+    where interm prog  = NS prog (urxvt prog prog)
+                        (appName =? prog)
+          weechatPlace = placeWithGaps (fixed (0.5, 0.5)) <+> doFloat
+
+--------------------------------------------------------------------------------
 navConf = defaultNavigation2DConfig
     { defaultTiledNavigation = centerNavigation }
 
+--------------------------------------------------------------------------------
 logger h = dynamicLogWithPP . namedScratchpadFilterOutWorkspacePP $ defaultPP
     { ppCurrent         = dzenfg "#ffcc66" . pad
     , ppVisible         = dzenfg "#99cc99" . pad
@@ -76,9 +86,9 @@ logger h = dynamicLogWithPP . namedScratchpadFilterOutWorkspacePP $ defaultPP
     , ppLayout          = const ""
     , ppTitle           = const ""
     , ppOutput          = hPutStrLn h }
+    where dzenfg c = wrap ("^fg("++c++")") "^fg()"
 
-dzenfg c = wrap ("^fg("++c++")") "^fg()"
-
+--------------------------------------------------------------------------------
 -- Keybinds
 keybinds c = mkKeymap c $
     [ ("M-<Space>", spawn "cmd=`yeganesh -x` && exec $cmd")
@@ -127,3 +137,7 @@ keybinds c = mkKeymap c $
             | (n, w) <- zip [1..9] (workspaces c)
             , (m, f) <- [("", W.view), ("S-", W.shift)]
             ]
+
+--------------------------------------------------------------------------------
+-- Mousebinds
+mousebinds _ = M.empty
