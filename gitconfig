@@ -13,4 +13,6 @@
 
 [alias]
 	co = checkout
-    pushit = !git push -u origin `git symbolic-ref --short HEAD`
+    pusheen = push
+    push-branch = !git push -u origin `git symbolic-ref --short HEAD`
+    pb = push-branch
