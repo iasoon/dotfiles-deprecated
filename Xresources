@@ -60,6 +60,13 @@ Xft.hintstyle: hintslight
 *.color15: t_foreground
 
 !-----------------------------------------------------------------------------
+! DMenu settings
+!-----------------------------------------------------------------------------
+dmenu*font: Anonymous Pro for Powerline:size=10
+dmenu.selforeground:    t_yellow
+dmenu.selbackground:    t_background
+
+!-----------------------------------------------------------------------------
 ! URxvt settings
 !-----------------------------------------------------------------------------
 
@@ -78,6 +85,7 @@ URxvt.saveLines: 8000
 *.font: xft:Anonymous Pro for Powerline:size=10, \
             xft:DejaVu Sans Mono for Powerline:size=10, \
             xft:Symbola:size=10
+
 
 URxvt.perl-ext-common: default,clipboard,url-select
 URxvt.url-select.launcher: /home/iasoon/bin/urlopen
